@@ -49,8 +49,7 @@ func (h *HttpParser) HTTPGet(ctx context.Context, req *http.Request) (result []b
 
 	ctx, cancel := context.WithTimeout(ctx, *h.timeout)
 	defer cancel()
-	// if req is nil, http.DefaultClient is used.
-	// using HttpParser.Do()
+
 	res, getErr := h.Do(ctx, h.client, req)
 	if getErr != nil {
 		return nil, getErr
