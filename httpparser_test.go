@@ -18,8 +18,8 @@ func mockCtxhttpDo(res *http.Response, errToReturn error) func(ctx context.Conte
 }
 
 func marshall(v *map[string]interface{}, t interface{}) interface{} {
-	tempJson, _ := json.Marshal(v)
-	json.Unmarshal(tempJson, t)
+	tempJSON, _ := json.Marshal(v)
+	json.Unmarshal(tempJSON, t)
 	return t
 
 }
@@ -34,7 +34,7 @@ func TestHttpParser_JSONParse_normal(t *testing.T) {
 		Body: ioutil.NopCloser(bytes.NewBuffer(body)),
 	}
 
-	jsonparser := NewHttpParser(nil, nil)
+	jsonparser := NewHTTPParser(nil, nil)
 	jsonparser.Do = mockCtxhttpDo(response, nil)
 	resultInterface := &nameTest{} // placeholder for the result
 
@@ -49,7 +49,7 @@ func TestHttpParser_JSONParse_normal(t *testing.T) {
 	assert.Equal(t, responseStruct.Name, resultInterface.Name)
 }
 
-func TestHttpParser_JSONParse_BadJsonFailure(t *testing.T) {
+func TestHTTPParser_JSONParse_BadJsonFailure(t *testing.T) {
 	type nameTest struct {
 		Name string
 	}
@@ -58,7 +58,7 @@ func TestHttpParser_JSONParse_BadJsonFailure(t *testing.T) {
 	response := &http.Response{
 		Body: ioutil.NopCloser(bytes.NewBuffer(body)),
 	}
-	jsonparser := NewHttpParser(nil, nil)
+	jsonparser := NewHTTPParser(nil, nil)
 	jsonparser.Do = mockCtxhttpDo(response, nil)
 
 	resultInterface := &nameTest{} // placeholder for the result
@@ -74,7 +74,7 @@ func TestHttpParser_JSONParse_BadJsonFailure(t *testing.T) {
 	assert.Equal(t, responseStruct.Name, resultInterface.Name)
 }
 
-func TestHttpParser_JSONParse_BadHTTPCallFailure(t *testing.T) {
+func TestHTTPParser_JSONParse_BadHTTPCallFailure(t *testing.T) {
 	type nameTest struct {
 		Name string
 	}
@@ -84,7 +84,7 @@ func TestHttpParser_JSONParse_BadHTTPCallFailure(t *testing.T) {
 		Body: ioutil.NopCloser(bytes.NewBuffer(body)),
 	}
 
-	jsonparser := NewHttpParser(nil, nil)
+	jsonparser := NewHTTPParser(nil, nil)
 	jsonparser.Do = mockCtxhttpDo(response, errors.New("mock http failure"))
 	resultInterface := &nameTest{} // placeholder for the result
 
@@ -99,7 +99,7 @@ func TestHttpParser_JSONParse_BadHTTPCallFailure(t *testing.T) {
 	assert.Equal(t, responseStruct.Name, resultInterface.Name)
 }
 
-func TestHttpParser_HTTPGet_normal(t *testing.T) {
+func TestHTTPParser_HTTPGet_normal(t *testing.T) {
 
 	body := []byte(`{"name": "james"}`)
 
@@ -107,7 +107,7 @@ func TestHttpParser_HTTPGet_normal(t *testing.T) {
 		Body: ioutil.NopCloser(bytes.NewBuffer(body)),
 	}
 
-	httpparser := NewHttpParser(nil, nil)
+	httpparser := NewHTTPParser(nil, nil)
 	httpparser.Do = mockCtxhttpDo(response, nil)
 	//httpparser := &HttpParser{client: &http.Client{}, Do: mockCtxDo} //mocked http.Client
 	request := &http.Request{} // empty request
@@ -116,7 +116,7 @@ func TestHttpParser_HTTPGet_normal(t *testing.T) {
 	assert.Equal(t, body, result)
 }
 
-func TestHttpParser_HTTPGet_error(t *testing.T) {
+func TestHTTPParser_HTTPGet_error(t *testing.T) {
 
 	body := []byte(`{"name": "james"}`)
 
@@ -124,7 +124,7 @@ func TestHttpParser_HTTPGet_error(t *testing.T) {
 		Body: ioutil.NopCloser(bytes.NewBuffer(body)),
 	}
 
-	httpparser := NewHttpParser(nil, nil)
+	httpparser := NewHTTPParser(nil, nil)
 	httpparser.Do = mockCtxhttpDo(response, errors.New("mock error"))
 	request := &http.Request{} // empty request
 	result, err := httpparser.HTTPGet(context.TODO(), request)
