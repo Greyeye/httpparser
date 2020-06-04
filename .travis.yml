@@ -1,5 +1,7 @@
 language: go
-go: 
+go:
+ - 1.12.17
+ - 1.13.12
  - 1.14.4
 
 script:
