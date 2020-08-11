@@ -9,15 +9,7 @@ import (
 	"time"
 )
 
-// HTTPParser struct
-// initialiser must define CtxClient...
-// parser := &httpparser.HttpParser{
-//			Client: httpClient,
-//			CtxClient: ctxhttp.Do,
-// }
-// overriding ctxhttp package's Do call with "CtxClient"
-// https://github.com/golang/net/blob/master/context/ctxhttp/ctxhttp.go#L23
-// Do(ctx context.Context, client *http.Client, req *http.Request) (*http.Response, error) {
+// HTTPParser struct to store HTTP Client information.
 type HTTPParser struct {
 	client  *http.Client
 	Do      func(req *http.Request) (*http.Response, error)
