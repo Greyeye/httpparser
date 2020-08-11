@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/pkg/errors"
-	"golang.org/x/net/context/ctxhttp"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -21,8 +20,8 @@ import (
 // Do(ctx context.Context, client *http.Client, req *http.Request) (*http.Response, error) {
 type HTTPParser struct {
 	client  *http.Client
-	Do      func(ctx context.Context, client *http.Client, req *http.Request) (*http.Response, error)
-	timeout *time.Duration
+	Do      func(req *http.Request) (*http.Response, error)
+	timeout time.Duration
 }
 
 // HTTPParseriface is used to generate mock interface file under ./mock/
@@ -50,10 +49,10 @@ func (h *HTTPParser) JSONParse(ctx context.Context, req *http.Request) (*map[str
 // HTTPGet returns raw HTTP GET body from results.
 func (h *HTTPParser) HTTPGet(ctx context.Context, req *http.Request) (result []byte, err error) {
 
-	ctx, cancel := context.WithTimeout(ctx, *h.timeout)
+	ctx, cancel := context.WithTimeout(ctx, h.timeout)
 	defer cancel()
-
-	res, getErr := h.Do(ctx, h.client, req)
+	req = req.WithContext(ctx)
+	res, getErr := h.Do(req)
 	if getErr != nil {
 		return nil, getErr
 	}
@@ -70,16 +69,14 @@ func (h *HTTPParser) HTTPGet(ctx context.Context, req *http.Request) (result []b
 
 // NewHTTPParser initialise the client.
 // If parameters are not given, it will initialise with the default values.
-func NewHTTPParser(client *http.Client, timeout *time.Duration) *HTTPParser {
-	var t time.Duration
+func NewHTTPParser(client *http.Client, timeout time.Duration) *HTTPParser {
+
 	var c *http.Client
-	if timeout == nil {
-		t = 30 * time.Second
-	}
 
 	if client == nil {
 		c = http.DefaultClient
+	} else {
+		c = client
 	}
-	hp := &HTTPParser{c, ctxhttp.Do, &t}
-	return hp
+	return &HTTPParser{c, c.Do, timeout}
 }

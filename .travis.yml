@@ -1,6 +1,7 @@
 language: go
-go: 
- - 1.14.4
+go:
+ - 1.13.12
+ - 1.14.7
 
 script:
  - go get -u golang.org/x/lint/golint
