@@ -13,7 +13,6 @@ http timeout (session call)
 POST/PUT/OPTION
 
 
-- [ ] implement ctxHttp.Do (context aware http call, will return ctx.Err() when timeout occurs)
 - [ ] implement transport timeout (http.Client.transport)
 - [ ] implenent POST, PUT, and multi-part upload
 - [ ] implement OPTION
@@ -22,27 +21,27 @@ POST/PUT/OPTION
 
 ## Install  
 
-Supports Go 1.12.17 - 1.14.1
+Supports Go 1.13 - 1.14.1
 
 ### Using go modules (aka. `go mod`)
 
 In your go files, simply use:
 ``` go
-import "github.com/Greyeye/httpwrapper"
+import "github.com/Greyeye/httpparser"
 ```
 
 Then next `go mod tidy` or `go test` invocation will automatically
-populate your `go.mod` with the last httpwrapper release.  
+populate your `go.mod` with the last httpparser release.  
 
 ### Using `$GOPATH`
 
 ```shell script
-go get github.com/Greyeye/httpwrapper
+go get github.com/Greyeye/httpparser
 ```
 
 automatically downloads to `$GOPATH/src`. Then in your
 go files use:
 ```go
-import "github.com/Greyeye/httpwrapper"
+import "github.com/Greyeye/httpparser"
 ```
 
