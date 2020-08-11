@@ -1,4 +1,4 @@
-# httpwrapper (work in progress)
+# HTTPParser (work in progress)
 remote http get wrapper
 
 [![Build Status](https://travis-ci.org/Greyeye/httpparser.svg?branch=master)](https://travis-ci.org/Greyeye/httpwrapper) - Master  
