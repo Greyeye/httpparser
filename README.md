@@ -7,11 +7,6 @@ remote http get wrapper
 [![Go Report Card](https://goreportcard.com/badge/github.com/Greyeye/httpwrapper)](https://goreportcard.com/report/github.com/Greyeye/httpwrapper)  
 
 ## TODO
-two timeouts
-context timeout (http call should be canned if parent context is cancelled)
-http timeout (session call)  
-POST/PUT/OPTION
-
 
 - [ ] implement transport timeout (http.Client.transport)
 - [ ] implenent POST, PUT, and multi-part upload
@@ -21,7 +16,7 @@ POST/PUT/OPTION
 
 ## Install  
 
-Supports Go 1.13 - 1.14.1
+Supports Go 1.13.12 - 1.14.7
 
 ### Using go modules (aka. `go mod`)
 
