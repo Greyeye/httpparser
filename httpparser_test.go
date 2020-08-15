@@ -35,7 +35,6 @@ func TestHttpParser_JSONParse_normal(t *testing.T) {
 		Body: ioutil.NopCloser(bytes.NewBuffer(body)),
 	}
 
-
 	jsonparser := NewHTTPParser(nil, 30*time.Second)
 	jsonparser.Do = mockDo(response, nil)
 	resultInterface := &nameTest{} // placeholder for the result
@@ -64,7 +63,6 @@ func TestHTTPParser_JSONParse_BadJsonFailure(t *testing.T) {
 	jsonparser := NewHTTPParser(nil, 30*time.Second)
 	jsonparser.Do = mockDo(response, nil)
 
-
 	resultInterface := &nameTest{} // placeholder for the result
 
 	request := &http.Request{} // empty request
@@ -87,7 +85,6 @@ func TestHTTPParser_JSONParse_BadHTTPCallFailure(t *testing.T) {
 	response := &http.Response{
 		Body: ioutil.NopCloser(bytes.NewBuffer(body)),
 	}
-
 
 	jsonparser := NewHTTPParser(nil, 30*time.Second)
 	jsonparser.Do = mockDo(response, errors.New("mock http failure"))
@@ -113,7 +110,6 @@ func TestHTTPParser_HTTPGet_normal(t *testing.T) {
 		Body: ioutil.NopCloser(bytes.NewBuffer(body)),
 	}
 
-
 	httpparser := NewHTTPParser(nil, 30*time.Second)
 	httpparser.Do = mockDo(response, nil)
 
@@ -130,7 +126,6 @@ func TestHTTPParser_HTTPGet_error(t *testing.T) {
 	response := &http.Response{
 		Body: ioutil.NopCloser(bytes.NewBuffer(body)),
 	}
-
 
 	httpparser := NewHTTPParser(nil, 30*time.Second)
 	httpparser.Do = mockDo(response, errors.New("mock error"))
