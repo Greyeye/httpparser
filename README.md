@@ -1,10 +1,10 @@
 # HTTPParser (work in progress)
 remote http get wrapper
 
-[![Build Status](https://travis-ci.org/Greyeye/httpparser.svg?branch=master)](https://travis-ci.org/Greyeye/httpwrapper) - Master  
-[![Build Status](https://travis-ci.org/Greyeye/httpparser.svg?branch=development)](https://travis-ci.org/Greyeye/httpwrapper) - Development  
+[![Build Status](https://travis-ci.org/Greyeye/httpparser.svg?branch=master)](https://travis-ci.org/Greyeye/httpparser) - Master  
+[![Build Status](https://travis-ci.org/Greyeye/httpparser.svg?branch=development)](https://travis-ci.org/Greyeye/httpparser) - Development  
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/Greyeye/httpwrapper)](https://goreportcard.com/report/github.com/Greyeye/httpwrapper)  
+[![Go Report Card](https://goreportcard.com/badge/github.com/Greyeye/httpparser)](https://goreportcard.com/report/github.com/Greyeye/httpparser)  
 
 ## TODO
 
@@ -16,7 +16,7 @@ remote http get wrapper
 
 ## Install  
 
-Supports Go 1.13.12 - 1.14.7
+Supports Go 1.13.12 - 1.14.7 - 1.15
 
 ### Using go modules (aka. `go mod`)
 
