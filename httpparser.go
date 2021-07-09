@@ -28,7 +28,6 @@ type HTTPParser struct {
 type HTTPParseriface interface {
 	JSONParse(ctx context.Context, req *http.Request) (*map[string]interface{}, error)
 	HTTPGet(ctx context.Context, req *http.Request) (result []byte, err error)
-	NewHttpParser(ctx context.Context, timeout time.Duration, req *http.Request)
 }
 
 // JSONParse returns JSON payload
